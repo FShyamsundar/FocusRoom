@@ -4,8 +4,18 @@ const defaultApiUrl = import.meta.env.DEV
   ? "http://localhost:5000/api"
   : "https://focusroom-1-zcd1.onrender.com/api";
 
+const normalizeApiUrl = (url) => {
+  const trimmedUrl = url?.replace(/\/+$/, "");
+
+  if (!trimmedUrl) {
+    return defaultApiUrl;
+  }
+
+  return /\/api$/.test(trimmedUrl) ? trimmedUrl : `${trimmedUrl}/api`;
+};
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || defaultApiUrl,
+  baseURL: normalizeApiUrl(import.meta.env.VITE_API_URL || defaultApiUrl),
 
   withCredentials: true,
 });
