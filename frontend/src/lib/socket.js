@@ -2,13 +2,18 @@ import { io } from "socket.io-client";
 
 let socket;
 
+const defaultSocketUrl = import.meta.env.DEV
+  ? "http://localhost:5000"
+  : undefined;
+
 export const connectSocket = (token) => {
   if (socket?.connected) {
     return socket;
   }
 
-const socketUrl =
+  const socketUrl =
     import.meta.env.VITE_SOCKET_URL ||
+    defaultSocketUrl ||
     // fallback to same host as API (works on Render when VITE_API_URL is set to https://.../api)
     (import.meta.env.VITE_API_URL
       ? import.meta.env.VITE_API_URL.replace(/\/api\/?$/, "")
