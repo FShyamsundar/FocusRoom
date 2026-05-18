@@ -7,9 +7,9 @@ export const connectSocket = (token) => {
     return socket;
   }
 
-  socket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:5000", {
+  socket = io(import.meta.env.VITE_SOCKET_URL, {
     auth: { token },
-    transports: ["websocket"],
+    withCredentials: true,
   });
 
   return socket;
@@ -23,4 +23,3 @@ export const disconnectSocket = () => {
     socket = null;
   }
 };
-
