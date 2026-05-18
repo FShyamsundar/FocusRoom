@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  body {
+    @apply min-h-screen bg-app font-sans text-ink antialiased;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-line bg-plate shadow-plate;
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-semibold tracking-tight text-ink;
+  }
+}
