@@ -78,7 +78,7 @@ const AppShell = ({ children }) => {
         {children}
 
         <footer className="mt-6 text-center text-xs text-muted">
-          <span>© {new Date().getFullYear()} </span>
+          <span>Copyright {new Date().getFullYear()} </span>
           <a
             href="https://shyamsundar-full-stack-developer.vercel.app/"
             target="_blank"
@@ -87,7 +87,7 @@ const AppShell = ({ children }) => {
           >
             shyam sundar
           </a>
-          <span> — all rights reserved.</span>
+          <span> - all rights reserved.</span>
         </footer>
       </motion.div>
     </div>

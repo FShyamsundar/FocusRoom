@@ -33,6 +33,17 @@ export const useRealtimePresence = () => {
 
     const socket = connectSocket(token);
 
+    dispatch(fetchActivePresence());
+    dispatch(fetchTodayCompletions());
+    dispatch(fetchPublicFeed());
+    dispatch(fetchCommunityPosts());
+    dispatch(fetchLeaderboard());
+
+    if (!socket) {
+      dispatch(setSocketConnected(false));
+      return undefined;
+    }
+
     const handleConnect = () => dispatch(setSocketConnected(true));
     const handleDisconnect = () => dispatch(setSocketConnected(false));
     const handlePresenceUpdate = (payload) => dispatch(syncPresence(payload));
@@ -57,12 +68,6 @@ export const useRealtimePresence = () => {
     socket.on("focus:completed", handleCompleted);
     socket.on("presence:error", handleError);
     socket.on("community:update", handleCommunityUpdate);
-
-    dispatch(fetchActivePresence());
-    dispatch(fetchTodayCompletions());
-    dispatch(fetchPublicFeed());
-    dispatch(fetchCommunityPosts());
-    dispatch(fetchLeaderboard());
 
     return () => {
       socket.off("connect", handleConnect);

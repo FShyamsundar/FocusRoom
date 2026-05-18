@@ -5,6 +5,7 @@ import http from "http";
 import { Server } from "socket.io";
 
 import app from "./app.js";
+import { corsOptions } from "./config/cors.js";
 import { connectDatabase } from "./config/db.js";
 import { FocusSession } from "./models/FocusSession.js";
 import { scheduleWeeklyDigest } from "./services/digestService.js";
@@ -20,10 +21,7 @@ const startServer = async () => {
 
   const server = http.createServer(app);
   const io = new Server(server, {
-    cors: {
-      origin: process.env.CLIENT_URL,
-      credentials: true,
-    },
+    cors: corsOptions,
   });
   app.set("io", io);
 
