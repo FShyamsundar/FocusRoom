@@ -42,13 +42,11 @@ const authSlice = createSlice({
     initialized: false,
   },
   reducers: {
-    logoutUser: (state) => {
+    logoutUserState: (state) => {
       state.user = null;
       state.token = null;
       state.initialized = true;
       state.error = null;
-      localStorage.removeItem("focusroom-token");
-      disconnectSocket();
     },
     clearAuthError: (state) => {
       state.error = null;
@@ -122,6 +120,11 @@ const authSlice = createSlice({
   },
 });
 
-export const { logoutUser, clearAuthError } = authSlice.actions;
-export default authSlice.reducer;
+export const logoutUser = () => (dispatch) => {
+  disconnectSocket();
+  localStorage.removeItem("focusroom-token");
+  dispatch(authSlice.actions.logoutUserState());
+};
 
+export const { clearAuthError } = authSlice.actions;
+export default authSlice.reducer;
