@@ -58,7 +58,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to={token ? "/room" : "/login"} replace />} />
       </Routes>
     </Suspense>
   );
